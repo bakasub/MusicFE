@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Add a Song to Playlist</title>
+  <title>Playlist's songs</title>
   <!-- Description, Keywords and Author -->
   <meta name="description" content="Your description">
   <meta name="keywords" content="Your,Keywords">
@@ -116,7 +116,7 @@
             <span class="icon-bar"></span>
           </button>
           <!-- logo area -->
-          <a class="navbar-brand" href="../index.html">
+          <a class="navbar-brand" href="../index.html" onclick="clearPL()">
             <!-- logo image -->
             <img class="img-responsive" src="../img/logo/logo.png" alt=""/>
           </a>
@@ -188,24 +188,14 @@
   <!-- block for animate navigation menu -->
   <div class="nav-animate"></div>
 
-  <div class="contact pad" id="contact">
-    <div class="row">
-      <div class="col-md-6 col-sm-6">
-        <div class="form-group">
-          <label>Playlist ID</label>
-          <input type="text" class="form-control" id="playlistName" name="playlist" placeholder="Enter playlist ID">
-        </div>
-        <div class="form-group">
-          <label>Song ID</label>
-          <input type="text" class="form-control" id="user" name="song" placeholder="Enter song ID">
-        </div>
-      </div>
-    </div>
-    <div class="">
-      <button type="submit" onclick="create()" class="btn btn-lg btn-theme">Add to playlist</button>
-    </div>
+  <table class="table table-striped-columns">
+    <tr>
+      <td>Index</td>
+      <td>Playlist name</td>
+    </tr>
+    <tbody id="playlists"></tbody>
+  </table>
 
-  </div>
 
   <!-- footer -->
   <footer>
@@ -235,40 +225,47 @@
 <script src="../js/bootstrap.min.js"></script>
 <!-- WayPoints JS -->
 <script src="../js/waypoints.min.js"></script>
-<!-- Include js plugin -->
-<script src="../js/owl.carousel.min.js"></script>
-<!-- One Page Nav -->
-<script src="../js/jquery.nav.js"></script>
-<!-- Respond JS for IE8 -->
-<script src="../js/respond.min.js"></script>
-<!-- HTML5 Support for IE -->
-<script src="../js/html5shiv.js"></script>
+<!--&lt;!&ndash; Include js plugin &ndash;&gt;-->
+<!--<script src="../js/owl.carousel.min.js"></script>-->
+<!--&lt;!&ndash; One Page Nav &ndash;&gt;-->
+<!--<script src="../js/jquery.nav.js"></script>-->
+<!--&lt;!&ndash; Respond JS for IE8 &ndash;&gt;-->
+<!--<script src="../js/respond.min.js"></script>-->
+<!--&lt;!&ndash; HTML5 Support for IE &ndash;&gt;-->
+<!--<script src="../js/html5shiv.js"></script>-->
 <!-- Custom JS -->
-<script src="../js/custom.js"></script>
+<!--<script src="../js/custom.js"></script>-->
 
-<script src="../js/jquery.js"></script>
+<!--<script src="../js/jquery.js"></script>-->
 <script>
-  function create() {
-    let playlistName = $('#playlistName').val();
-    let user = $('#user').val();
-
-    let song = {
-      playlist: playlistName,
-      song: user,
-    }
-    console.log(song)
+  showAll()
+  function showAll() {
+    let playlist = localStorage.getItem('playlist')
     $.ajax({
-      type: 'POST',
-      url: "http://localhost:8080/playlist/song",
-      headers: {
-        'Content-type': 'application/json',
+      type: 'GET',
+      url: "http://localhost:8080/detail/"+ playlist,
+      success: (playlists) => {
+        let htmlPL = ``;
+        for (let i = 0; i < playlists.length; i++) {
+          htmlPL += `<tr>
+                                <td>${i + 1}</td>
+                                <td>${playlists[i].playlistName}</td>
+                                <td><button onclick="showDelete('${playlists[i]._id}')">Delete</button></td>
+                                <td><button onclick="showEdit('${playlists[i]._id}">Edit</button></td>
+                            </tr>`
+        }
+        $('#playlists').html(htmlPL);
       },
-      data: JSON.stringify(song),
-      success: () => {
-        document.location.href="playlistMenu.html"
+      error: (err)=>{
+        console.log(err)
       }
     })
-  };
+  }
+
+  function clearPL() {
+    localStorage.removeItem("playlist")
+  }
+
 
 </script>
 </body>

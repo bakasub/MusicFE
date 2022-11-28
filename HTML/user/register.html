@@ -40,17 +40,18 @@
             success: (dataUser) => {
                 if (dataUser.message) {
                     alert(dataUser.message)
-                    reset();
+                    resetRG();
                 } else {
                     alert('Create success');
-                    reset();
+                    resetRG();
+                    document.location.href="login.html"
 
                 }
             }
         })
     }
 
-    function reset() {
+    function resetRG() {
         $('#usernameR').val('');
         $('#passwordR').val('');
         $('#phoneNumber').val('');

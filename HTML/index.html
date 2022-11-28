@@ -125,13 +125,16 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#latestalbum">Latest Album</a></li>
-                        <li><a href="#featuredalbum">Featured Album</a></li>
-                        <li><a href="songViews/uploadSong.html">Upload your song</a></li>
+                        <li style="margin-top: 20px;margin-right: 150px"id="">
+                            <input type="search" placeholder="Search"id="search" style="width: 150px ;border-radius: 5px;border:0.2mm solid grey;background: rgba(0,0,0,0.5);color: white;height: 30px;">
+                            <button type="button" onclick="findSong()" style="background: rgba(0,0,0,0.5);color: grey;border: 0.2mm solid grey;height: 30px;border-radius: 5px">Search</button>
+                        </li>
+                        <li><a href="songViews/manageSong.html">Manage songs</a></li>
                         <li><a href="playlistViews/playlistMenu.html">Playlists</a></li>
                         <li><a onclick="logout()">Log out</a></li>
                         <li><a href="user/login.html">Login</a></li>
                         <li><a href="user/register.html">Register</a></li>
+                        <li><a href="user/changePassword.html">Change password</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -227,127 +230,11 @@
                     <div class="col-md-6 col-sm-6">
                         <!-- play list -->
                         <div class="playlist-content">
-                            <ul class="list-unstyled">
-                                <li class="playlist-number">
+                                <ul class="list-unstyled" id="listSong">
+                                </ul>
                                     <!-- song information -->
-                                    <div class="song-info">
-                                        <!-- song title -->
-                                        <h4>Melodi Song Track One</h4>
-                                        <p><strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>: Rock
-                                            &nbsp;|&nbsp; <strong>Singer</strong>: Dawn</p>
-                                    </div>
                                     <!-- music icon -->
-                                    <div class="music-icon">
-                                        <a href="#"><i class="fa fa-play"></i></a>
-                                        <a href="#"><i class="fa fa-pause"></i></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="playlist-number">
-                                    <!-- song information -->
-                                    <div class="song-info">
-                                        <!-- song title -->
-                                        <h4>Melodi Song Track Two</h4>
-                                        <p><strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>: Rock
-                                            &nbsp;|&nbsp; <strong>Singer</strong>: Dawn</p>
-                                    </div>
-                                    <!-- music icon -->
-                                    <div class="music-icon">
-                                        <a href="#"><i class="fa fa-play"></i></a>
-                                        <a href="#"><i class="fa fa-pause"></i></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="playlist-number">
-                                    <!-- song information -->
-                                    <div class="song-info">
-                                        <!-- song title -->
-                                        <h4>Melodi Song Track Three</h4>
-                                        <p><strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>: Rock
-                                            &nbsp;|&nbsp; <strong>Singer</strong>: Dawn</p>
-                                    </div>
-                                    <!-- music icon -->
-                                    <div class="music-icon">
-                                        <a href="#"><i class="fa fa-play"></i></a>
-                                        <a href="#"><i class="fa fa-pause"></i></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="playlist-number">
-                                    <!-- song information -->
-                                    <div class="song-info">
-                                        <!-- song title -->
-                                        <h4>Melodi Song Track Four</h4>
-                                        <p><strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>: Rock
-                                            &nbsp;|&nbsp; <strong>Singer</strong>: Dawn</p>
-                                    </div>
-                                    <!-- music icon -->
-                                    <div class="music-icon">
-                                        <a href="#"><i class="fa fa-play"></i></a>
-                                        <a href="#"><i class="fa fa-pause"></i></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="playlist-number">
-                                    <!-- song information -->
-                                    <div class="song-info">
-                                        <!-- song title -->
-                                        <h4>Melodi Song Track Five</h4>
-                                        <p><strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>: Rock
-                                            &nbsp;|&nbsp; <strong>Singer</strong>: Dawn</p>
-                                    </div>
-                                    <!-- music icon -->
-                                    <div class="music-icon">
-                                        <a href="#"><i class="fa fa-play"></i></a>
-                                        <a href="#"><i class="fa fa-pause"></i></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="playlist-number">
-                                    <!-- song information -->
-                                    <div class="song-info">
-                                        <!-- song title -->
-                                        <h4>Melodi Song Track Six</h4>
-                                        <p><strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>: Rock
-                                            &nbsp;|&nbsp; <strong>Singer</strong>: Dawn</p>
-                                    </div>
-                                    <!-- music icon -->
-                                    <div class="music-icon">
-                                        <a href="#"><i class="fa fa-play"></i></a>
-                                        <a href="#"><i class="fa fa-pause"></i></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="playlist-number">
-                                    <!-- song information -->
-                                    <div class="song-info">
-                                        <!-- song title -->
-                                        <h4>Melodi Song Track Seven</h4>
-                                        <p><strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>: Rock
-                                            &nbsp;|&nbsp; <strong>Singer</strong>: Dawn</p>
-                                    </div>
-                                    <!-- music icon -->
-                                    <div class="music-icon">
-                                        <a href="#"><i class="fa fa-play"></i></a>
-                                        <a href="#"><i class="fa fa-pause"></i></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="playlist-number">
-                                    <!-- song information -->
-                                    <div class="song-info">
-                                        <!-- song title -->
-                                        <h4>Melodi Song Track Eight</h4>
-                                        <p><strong>Album</strong>: Title &nbsp;|&nbsp; <strong>Type</strong>: Rock
-                                            &nbsp;|&nbsp; <strong>Singer</strong>: Dawn</p>
-                                    </div>
-                                    <!-- music icon -->
-                                    <div class="music-icon">
-                                        <a href="#"><i class="fa fa-play"></i></a>
-                                        <a href="#"><i class="fa fa-pause"></i></a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -481,13 +368,74 @@
 <!-- Custom JS -->
 <script src="js/custom.js"></script>
 <script>
-    // showAll();
+    showAll();
 
     function logout() {
         localStorage.clear('token','idUser');
-        document.location.href="user/login.html"
+        document.location.href="index.html"
 
     }
+
+    function showAll() {
+        $.ajax({
+            type: 'GET',
+            url: "http://localhost:8080/song",
+            success: (songs) => {
+                let htmlSongs = ``;
+                for (let i = 0; i < songs.length; i++) {
+                    htmlSongs += `<li class="playlist-number">
+                                    <div class="song-info">
+                                    <h4>${songs[i].name}</h4>
+                                    <p><strong>Composer</strong>: ${songs[i].composer}  &nbsp;|&nbsp; <strong>Artist</strong>: ${songs[i].artist}</p>
+                                    </div>
+                                   <audio controls>
+  <source src="${songs[i].file}" type="audio/ogg">
+  <source src="" type="audio/ogg">
+</audio>
+
+                                    <div class="clearfix"></div>
+                                    </li>`
+                }
+                $('#listSong').html(htmlSongs);
+            }
+        })
+    };
+
+    function findSong(){
+        let search = $('#search').val();
+        let keySearch = {
+            keyWord:search
+        }
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:8080/song/search",
+            headers: {
+                'Content-type': 'application/json',
+            },
+            data: JSON.stringify(keySearch),
+            success: (songs) => {
+                console.log(songs)
+                let htmlSongs = ``;
+
+                for (let i = 0; i < songs.length; i++) {
+                    htmlSongs += `<li class="playlist-number">
+                                    <div class="song-info">
+                                    <h4>${songs[i].name}</h4>
+                                    <p><strong>Composer</strong>: ${songs[i].composer}  &nbsp;|&nbsp; <strong>Artist</strong>: ${songs[i].artist}</p>
+                                    </div>
+                                   <audio controls>
+  <source src="${songs[i].file}" type="audio/ogg">
+  <source src="" type="audio/ogg">
+</audio>
+                                     <button onclick="showFormDelete('${songs[i]._id}')">Delete</button>
+                                     <button  onclick="showFormEdit('${songs[i]._id}')" data-toggle="modal" data-target="#exampleModalEdit">Edit</button>
+                                    <div class="clearfix"></div>
+                                    </li>`
+                }
+                $('#listSong').html(htmlSongs);
+            }
+        })
+    };
     // function create() {
     //     let name = $('#name').val();
     //     let price = $('#price').val();

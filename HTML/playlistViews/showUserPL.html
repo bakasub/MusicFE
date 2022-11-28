@@ -13,6 +13,8 @@
   <!-- Styles -->
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+
   <!-- Animate CSS -->
   <link href="../css/animate.min.css" rel="stylesheet">
   <!-- Basic stylesheet -->
@@ -185,6 +187,7 @@
   </div>
   <!--/ banner end -->
 
+
   <!-- block for animate navigation menu -->
   <div class="nav-animate"></div>
 
@@ -213,6 +216,30 @@
   </footer>
   <!-- footer end -->
 
+  <div>
+    <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="edit">Form Edit</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input id="nameEdit" type="text" class="form-control" aria-describedby="emailHelp" value="">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="edit()" data-bs-dismiss="modal">Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scroll to top -->
   <span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span>
 
@@ -226,17 +253,17 @@
 <!-- WayPoints JS -->
 <script src="../js/waypoints.min.js"></script>
 <!--&lt;!&ndash; Include js plugin &ndash;&gt;-->
-<!--<script src="../js/owl.carousel.min.js"></script>-->
+<script src="../js/owl.carousel.min.js"></script>
 <!--&lt;!&ndash; One Page Nav &ndash;&gt;-->
-<!--<script src="../js/jquery.nav.js"></script>-->
+<script src="../js/jquery.nav.js"></script>
 <!--&lt;!&ndash; Respond JS for IE8 &ndash;&gt;-->
-<!--<script src="../js/respond.min.js"></script>-->
+<script src="../js/respond.min.js"></script>
 <!--&lt;!&ndash; HTML5 Support for IE &ndash;&gt;-->
-<!--<script src="../js/html5shiv.js"></script>-->
+<script src="../js/html5shiv.js"></script>
 <!-- Custom JS -->
-<!--<script src="../js/custom.js"></script>-->
+<script src="../js/custom.js"></script>
 
-<!--<script src="../js/jquery.js"></script>-->
+<script src="../js/jquery.js"></script>
 <script>
   showAll()
   function showAll() {
@@ -250,9 +277,10 @@
         for (let i = 0; i < playlists.length; i++) {
           htmlPL += `<tr>
                                 <td>${i + 1}</td>
-                                <td><a href="http://localhost:8080/playlist/detail/${playlists[i]._id}">${playlists[i].playlistName}</a></td>
-                                <td><button onclick="showDelete('${playlists[i]._id}')">Delete</button></td>
-                                <td><button onclick="showEdit('${playlists[i]._id}">Edit</button></td>
+                                <td><a onclick="setPL(${playlists[i]._id})" href="http://localhost:8080/playlist/detail/">${playlists[i].playlistName}</a></td>
+                                <td>${playlists[i]._id}</td>
+                                <td><button onclick="showFormDelete('${playlists[i]._id}')">Delete</button></td>
+                                <td><button   data-toggle="modal" data-target="#exampleModalEdit" >Edit</button></td>
                             </tr>`
         }
         $('#playlists').html(htmlPL);
@@ -263,7 +291,65 @@
     })
   }
 
+  function setPL(playlist) {
+    localStorage.setItem("playlist",playlist)
+  }
+
+  let editId;
+
+  function showFormEdit(id) {
+    $.ajax({
+      type: 'GET',
+      url: `http://localhost:8080/playlist/${id}`,
+      success: (playlist) => {
+        $('#nameEdit').val(playlist.name);
+        editId = id;
+      }
+    })
+  }
+
+  function edit() {
+    let id = editId;
+    let name = $('#nameEdit').val();
+    let date = new Date().toLocaleDateString().padStart(10, '0')
+    let user = localStorage.getItem('idUser')
+    let playlist = {
+      id: id,
+      playlistName: name,
+      createDate: date,
+      user: user
+    }
+    $.ajax({
+      type: 'PUT',
+      url: `http://localhost:8080/playlist/${id}`,
+      headers: {
+        'Content-type': 'application/json',
+      },
+      data: JSON.stringify(playlist),
+      success: () => {
+        showAll();
+      }
+    })
+  }
+
+  function showFormDelete(id) {
+
+    $.ajax({
+      type: 'DELETE',
+      url: `http://localhost:8080/playlist/${id}`,
+      headers: {
+        'Content-type': 'application/json',
+      },
+      success: () => {
+        showAll()
+      }
+    });
+
+  }
+
 
 </script>
+
+
 </body>
 </html>
